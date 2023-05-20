@@ -1,0 +1,52 @@
+// Название файла: shoppingCart.js
+
+class ShoppingCart {
+  constructor() {
+    this.items = [];
+  }
+
+  addItem(item) {
+    this.items.push(item);
+  }
+
+  removeItem(itemId) {
+    this.items = this.items.filter((item) => item.id !== itemId);
+  }
+
+  getTotalPrice() {
+    const totalPrice = this.items.reduce((total, item) => {
+      return total + item.price;
+    }, 0);
+
+    return totalPrice.toFixed(2);
+  }
+
+  printCart() {
+    console.log('Shopping Cart:');
+    this.items.forEach((item) => {
+      console.log(`${item.name} - $${item.price}`);
+    });
+    console.log('Total Price:', this.getTotalPrice());
+  }
+}
+
+class Item {
+  constructor(id, name, price) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+  }
+}
+
+// Пример использования класса ShoppingCart:
+const cart = new ShoppingCart();
+
+const item1 = new Item(1, 'T-shirt', 25.99);
+const item2 = new Item(2, 'Jeans', 49.99);
+const item3 = new Item(3, 'Shoes', 79.99);
+
+cart.addItem(item1);
+cart.addItem(item2);
+cart.addItem(item3);
+cart.removeItem(2);
+cart.printCart();
